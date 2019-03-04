@@ -7,7 +7,7 @@ This simple go project will scan your pull requests and mark pull request with '
 
 The tool will not create the old flag, you have to create it manually.
 
-# usage
+# Usage
 
 ## Parameters:
 ### Parameters can be provided either as flag, configuration file or environment variable.
