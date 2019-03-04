@@ -10,9 +10,8 @@ The tool will not create the old flag, you have to create it manually.
 # Usage
 
 ## Parameters:
-### Parameters can be provided either as flag, configuration file or environment variable.
+### Parameters can be provided either as flag or environment variable.
 #### Environment variable: https://github.com/namsral/flag#parsing-environment-variables
-#### Config file: https://github.com/namsral/flag#parsing-configuration-files
 
 #### Command line arguments:
 * --token this is the github auth token, you can create your own: https://github.com/settings/tokens
