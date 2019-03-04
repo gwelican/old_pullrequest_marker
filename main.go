@@ -17,15 +17,18 @@ func main() {
 	var token string
 	var owner string
 	var repo string
+	var serverUrl string
 
 	flag.IntVar(&days, "days", 5, "")
 	flag.StringVar(&token, "token", "", "")
 	flag.StringVar(&owner, "owner", "", "")
 	flag.StringVar(&repo, "repo", "", "")
+	flag.StringVar(&serverUrl, "serverurl", "https://api.github.com/", "")
+
 	flag.Parse()
 	ctx := context.Background()
 
-	client := createGithubClient(ctx, token)
+	client := createGithubClient(ctx, token, serverUrl)
 	pullRequests := getPullRequests(client, ctx, owner, repo)
 
 	for _, r := range pullRequests {
@@ -48,13 +51,13 @@ func getPullRequests(client *github.Client, ctx context.Context, owner string, r
 	return pullRequests
 }
 
-func createGithubClient(ctx context.Context, token string) *github.Client {
+func createGithubClient(ctx context.Context, token string, serverUrl string) *github.Client {
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
-	githubBaseUrl, err := url.Parse("https://github.expedia.biz/api/v3/")
-	client.BaseURL = githubBaseUrl
+	githubBaseUrl, err := url.Parse(serverUrl)
 	checkErrorAndExit(err)
+	client.BaseURL = githubBaseUrl
 	return client
 }
 
